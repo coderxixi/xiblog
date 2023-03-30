@@ -7,7 +7,7 @@ outline: [2, 3, 4]
  import LearningNotes from './components/LearningNotes.vue'
 
 </script>
-<style src="./index.scss"></style>
+
 
 # 日常笔记
 
