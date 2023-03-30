@@ -4,7 +4,7 @@ outline: [2, 3, 4]
 ---
 
 <script setup>
-import MNavLinks from './components/Pnm.vue'
+ import LearningNotes from './components/LearningNotes.vue'
 
 </script>
 <style src="./index.scss"></style>
@@ -12,6 +12,6 @@ import MNavLinks from './components/Pnm.vue'
 # 日常笔记
 
 
-<Pnm />
+ <LearningNotes/>
 
 <br />
