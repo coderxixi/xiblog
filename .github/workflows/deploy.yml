@@ -13,7 +13,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-          cache: pnpm
+      - run: npm i pnpm -g
       - run: pnpm install --frozen-lockfile
 
       - name: Build
@@ -24,3 +24,5 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
+
+
