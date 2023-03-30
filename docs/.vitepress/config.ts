@@ -3,6 +3,7 @@ import { defineConfig } from 'vitepress'
 import { head, nav, sidebar } from './configs'
 
 export default defineConfig({
+  base: '/xiblog/',
   outDir: '../dist',
 
   lang: 'zh-CN',
