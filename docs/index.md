@@ -4,8 +4,8 @@ layoutClass: 'm-home-layout'
 
 hero:
   name: coderxixi
-  text: 嘻嘻个人前端导航
-  tagline: 使用 VitePress 打造个人前端导航
+  text: 嘻嘻个人前端博客
+  tagline: 使用 VitePress 打造个人前端博客
   image:
     src: /logo.png
     alt: 嘻嘻物语
