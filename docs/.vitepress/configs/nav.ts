@@ -6,7 +6,7 @@ export const nav: DefaultTheme.Config['nav'] = [
     text: '日常笔记',
     items: [
       { text: 'HTML', link: '/html/' },
-      { text: 'CSS', link: '/text/' },
+      { text: 'CSS', link: '/csslink/' },
       { text: 'Javascript', link: '/item-3' }
     ]
   },
