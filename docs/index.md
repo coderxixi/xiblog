@@ -4,18 +4,18 @@ layoutClass: 'm-home-layout'
 
 hero:
   name: coderxixi
-  text: 嘻嘻个人前端博客
+  text: 嘻嘻的个人前端博客
   tagline: 使用 VitePress 打造个人前端博客
   image:
     src: /logo.png
-    alt: 嘻嘻物语
+    alt: 嘻嘻博客
 features:
   - icon: 📖
-    title: 前端物语
-    details: 整理前端常用知识点<br />如有异议按你的理解为主，不接受反驳
+    title: 前端知识
+    details: 整理前端常用知识点<br />
   - icon: 📘
     title: 源码阅读
-    details: 了解各种库的实现原理<br />学习其中的小技巧和冷知识
+    details: 学习各种库的实现原理<br />学习其中的小技巧和冷知识
   - icon: 💡
     title: 奇淫技巧
     details: 各种各样的奇淫技巧<br />配合 CV 大法来解决疑难杂症
@@ -33,9 +33,9 @@ features:
 <style>
   .text {
   font-size: 48px;
-  line-height: 48px;
+  /* line-height: 48px; */
   text-align: center;
-  margin-top: 20px;
+  /* margin-top: 20px; */
 
   background: -webkit-linear-gradient(315deg,
       rgb(210, 86, 53) 10%,
