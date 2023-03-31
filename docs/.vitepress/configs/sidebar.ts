@@ -16,6 +16,6 @@ export const sidebar: DefaultTheme.Config['sidebar'] = [
   {
     text: '链接与图片',
     // collapsed: true,
-    link: '/text/'
+    link: '/picturesandlinks/'
   }
 ]
