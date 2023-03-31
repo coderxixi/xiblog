@@ -21,12 +21,14 @@ export default defineConfig({
 
   /* 主题配置 */
   themeConfig: {
+    siteTitle: '嘻嘻博客',
     i18nRouting: false,
 
     logo: '/logo.png',
 
     nav,
-    sidebar,
+ 
+    sidebar: sidebar,
     /* 右侧大纲配置 */
     outline: {
       level: 'deep',

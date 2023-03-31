@@ -4,7 +4,11 @@ export const nav: DefaultTheme.Config['nav'] = [
   { text: '个人主页', link: 'https://github.com/coderxixi' },
   {
     text: '日常笔记',
-    link: '/learningnotes/'
+    items: [
+      { text: 'HTML', link: '/html/' },
+      { text: 'CSS', link: '/item-2' },
+      { text: 'Javascript', link: '/item-3' }
+    ]
   },
   {
     text: '前端工具导航',
