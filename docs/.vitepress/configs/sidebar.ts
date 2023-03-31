@@ -17,5 +17,10 @@ export const sidebar: DefaultTheme.Config['sidebar'] = [
     text: '链接与图片',
     // collapsed: true,
     link: '/picturesandlinks/'
+  },
+  {
+    text: '表单和列表',
+    // collapsed: true,
+    link: '/formsandlists/'
   }
 ]
