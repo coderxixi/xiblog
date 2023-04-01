@@ -23,7 +23,7 @@ export const sidebar = {
         { text: '选择器', link: '/css/selector' }, // /guide/one.md
         { text: '元素权重', link: '/css/elementweight' },// /guide/two.md
         { text: '文本控制', link: '/css/textcontrol' },
-        { text: '盒子模型', link: '/css/tablemultimedia' },
+        { text: '盒子模型', link: '/css/boxmodel' },
         { text: '背景处理', link: '/css/tablemultimedia' },
         { text: '数据样式', link: '/css/tablemultimedia' },
         { text: '浮动布局', link: '/css/tablemultimedia' },
