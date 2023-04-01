@@ -1,6 +1,6 @@
 ## 盒子模型
 
-<!-- <image src='./img/box.png'></image> -->
+<image src='./img/box.png'></image>
 
 基本使用示例
 
