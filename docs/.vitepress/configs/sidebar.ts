@@ -25,7 +25,7 @@ export const sidebar = {
         { text: '文本控制', link: '/css/textcontrol' },
         { text: '盒子模型', link: '/css/boxmodel' },
         { text: '背景处理', link: '/css/backgroundprocessing' },
-        { text: '数据样式', link: '/css/tablemultimedia' },
+        { text: '数据样式', link: '/css/datastyle' },
         { text: '浮动布局', link: '/css/tablemultimedia' },
         { text: '定位布局', link: '/css/tablemultimedia' },
         { text: '弹性布局', link: '/css/tablemultimedia' },
