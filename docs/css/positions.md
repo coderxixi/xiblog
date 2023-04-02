@@ -53,7 +53,7 @@ import Krelative from './components/krelative.vue'
 
 <Krelative>
  <article>
-  <img src="../../public/logo.png" alt="">
+  <img src="./img/logo.png" alt="">
    入江南烟水路，行尽江南，不与离人遇。睡里消魂无说处，觉来惆怅消魂误。欲尽此情书尺素，浮雁沉鱼，终了无凭据。却倚缓弦歌别绪，断肠移破秦筝柱。思念之初，神魂入梦，望，只能弹筝诉说，
  </article>
 </Krelative>
