@@ -14,7 +14,7 @@ export const sidebar = {
       ]
     }
     ],
-  '/css/': [
+    '/css/': [
     {
       // text: 'html',
       items: [
@@ -46,7 +46,16 @@ export const sidebar = {
 
       ]
     }
-  ]
+     ],
+  '/typescriptmd/': [
+    {
+      // text: 'html',
+      items: [
+        { text: '环境配置', link: '/typescriptmd/' },
+        { text: '基础类型', link: '/typescriptmd/foundationtype' }, // /guide/index.md
+      ]
+    }
+  ],
   }
 
 // export const sidebar: DefaultTheme.Config['sidebar'] = [
