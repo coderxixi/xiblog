@@ -27,7 +27,7 @@ export const sidebar = {
         { text: '背景处理', link: '/css/backgroundprocessing' },
         { text: '数据样式', link: '/css/datastyle' },
         { text: '浮动布局', link: '/css/float' },
-        { text: '定位布局', link: '/css/tablemultimedia' },
+        { text: '定位布局', link: '/css/positions' },
         { text: '弹性布局', link: '/css/tablemultimedia' },
         { text: '栅格布局', link: '/css/tablemultimedia' },
         { text: '变形动画', link: '/css/tablemultimedia' },
