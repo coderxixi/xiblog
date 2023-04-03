@@ -52,7 +52,8 @@ export const sidebar = {
       // text: 'html',
       items: [
         { text: '环境配置', link: '/typescriptmd/' },
-        { text: '基础类型', link: '/typescriptmd/foundationtype' }, // /guide/index.md
+        { text: '基础类型', link: '/typescriptmd/foundationtype' },
+        { text: '配置和调试', link:'/typescriptmd/dispose'} // /guide/index.md
       ]
     }
   ],
