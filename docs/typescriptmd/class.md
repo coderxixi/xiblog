@@ -401,3 +401,71 @@ const P = new Player()
 T.move()
 P.move()
 ```
+
+### 对象
+
+下面使用接口来约束对象
+
+
+```ts
+interface UserInterface {
+    name:string,
+    age:number,
+    info(oter:string):string
+}
+const info:UserInterface={
+    name:'刘嘻嘻',
+    age:18,
+    isLock:false,
+    info(odle:string){
+        return `${this.name}${this.age}岁了`
+    }
+}
+```
+如果尝试添加一个接口中不存在的函数将报错，移除接口的属性也将报错。
+
+```ts
+const info: UserInterface = {
+    getName() { }  //“getName”不在类型“UserInterface”中
+}
+```
+如果有额外的属性，使用以下方式声明，这样就可以添加任意属性了
+```ts
+interface UserInterface {
+    name: string;
+    age: number;
+    isLock: boolean;
+    [key:string]:any
+}
+```
+
+### 接口继承
+
+下面定义动物结束的接口 AnimalInterface DogInterface 接口可以使用 extends 来继承该接口
+
+```ts
+interface AnimalInterface {
+    cry(): void
+}
+
+interface DogInterface extends AnimalInterface {
+    name: string
+    move(): void
+}
+class Animal {
+    protected getName(): { name:string } {
+        return name
+    }
+}
+class Dog extends Animal implements AnimalInterface {
+    name: string = '小黑'
+    public attribute(): void {
+        console.log(`${this.name}对颜色是黑色`)
+    }
+    end() {
+        console.log('游戏结束');
+    }
+}
+
+```
+
