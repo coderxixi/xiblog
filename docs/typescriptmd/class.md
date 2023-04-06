@@ -462,10 +462,351 @@ class Dog extends Animal implements AnimalInterface {
     public attribute(): void {
         console.log(`${this.name}对颜色是黑色`)
     }
-    end() {
-        console.log('游戏结束');
+    cry() {
+        console.log('dogdog');
     }
+}
+
+class Pig extends Animal implements AnimalInterface {
+    name: string = '小狗'
+    public attribute(): void {
+        console.log(`${this.name}的颜色是天空蓝`)
+    }
+     cry() {
+        console.log('PigPig');
+    }
+}
+
+const d = new Dog()
+const p = new Pig()
+d.move()
+p.move()
+
+```
+
+### 函数 
+
+下面是对函数参数的类型约束
+
+```ts
+
+interface UserInterface {
+    name: string;
+    age: number;
+    isLock: boolean;
+}
+
+function lockUser(user: UserInterface, state: boolean): UserInterface {
+    user.isLock = state;
+    return user;
+}
+
+let user: UserInterface = {
+    name: '刘嘻嘻', age: 18, isLock: false
+}
+
+lockUser(user, true);
+console.log(user);
+```
+
+#### 函数声明
+
+下面使用 UserInterface 接口约束函数的参数与返回值
+
+* 会根据接口规范提示代码提示
+* 严格约束参数类型，维护代码安全
+
+#### 函数参数
+
+下面是对函数参数的类型约束
+
+```ts
+interface UserInterface {
+    name: string;
+    age: number;
+    isLock: boolean;
+}
+
+function lockUser(user: UserInterface, state: boolean): UserInterface {
+    user.isLock = state;
+    return user;
+}
+
+let user: UserInterface = {
+    name: '刘嘻嘻', age: 18, isLock: false
+}
+
+lockUser(user, true);
+console.log(user);
+
+```
+
+#### 函数声明
+
+使用接口可以约束函数的定义
+
+```ts
+interface Pay {
+    (price: number): boolean
+}
+const getUserInfo: Pay = (price: number)=>true
+
+```
+
+### 构造函数
+下面的代码我们发现需要在多个地方使用对 user 类型的定义
+```ts
+class User {
+    info: { name: string, age: number }
+    constructor(user: { name: string, age: number }) {
+        this.info = user
+    }
+}
+const user = new User({ name: 'liuxixi', age: 18 })
+console.log(user);
+```
+使用 interface 可以优化代码，同时也具有良好的代码提示
+
+```ts
+interface UserInterface {
+    name: string,
+    age: number
+}
+class User {
+    info: UserInterface
+    constructor(user: UserInterface) {
+        this.info = user
+    }
+}
+const user= new User({ name: 'liuxixi', age: 18 })
+console.log(user);
+
+```
+
+### 数组
+
+对数组类型使用接口进行约束
+```ts
+const info: UserInterface = {
+    name: 'liuxixi',
+    age: 18,
+    isLock: false
+}
+
+const user: UserInterface = {
+    name: '刘嘻嘻',
+    age: 18,
+    isLock: false
+}
+
+const users: UserInterface[] = [];
+users.push(info, user)
+console.log(users);
+
+```
+
+### 枚举
+下面是使用枚举设置性别
+
+```ts
+enum SexType {
+    BOY, GIRL
+}
+
+interface UserInterface {
+    name: string,
+    sex: SexType
+}
+
+const user: UserInterface = {
+    name: '刘嘻嘻',
+    sex: SexType.GIRL
+}
+console.log(user); //{ name: '刘嘻嘻', sex: 1 }
+```
+
+## type
+
+type 与 interface 非常相似都可以描述一个对象或者函数，使用 type 用于定义类型的别名，是非常灵活的类型定义方式。
+
+* type 可以定义基本类型别名如联合类型，元组
+* type 与 interface 都是可以进行扩展
+* 使用 type 相比 interface 更灵活
+* 如果你熟悉其他编程语言，使用 interface 会让你更亲切
+* 使用类(class) 时建议使用接口，这可以与其他编程语言保持统一
+* 决定使用哪个方式声明类型，最终还是看公司团队的规范
+
+### 基本使用 
+
+下面是使用 type 声明对象类型
+```ts
+type User = {
+    name: string,
+    age: number
+}
+const hd: User = { name: '刘嘻嘻', age: 18 }
+```
+
+上面已经讲解了使用 interface 声明函数，下面来看使用 type 声明函数的方式
+```ts
+type Pay = (price: number) => boolean
+const wepay: Pay = (price: number) => {
+    console.log(`微信支付${price}`);
+    return true;
+}
+
+wepay(100)
+
+```
+
+
+### 类型别名
+
+type 可以为 number、string、boolean、object 等基本类型定义别名，比如下例的 IsAdmin。
+```ts
+//基本类型别名
+type IsAdmin = boolean
+
+//定义联合类型
+type Sex = 'boy' | 'girl'
+
+type User = {
+    isAdmin: IsAdmin,
+    sex: Sex
+}
+const user: User = {
+    isAdmin: true,
+    sex: "boy"
+}
+
+//声明元组
+const users: [User] = [user]
+```
+### 索引类型
+
+type 与 interface 在索引类型上的声明是相同的
+
+```ts
+interface User {
+    [key: string]: any
+}
+
+type UserTYpe = {
+    [key: string]: any
 }
 
 ```
 
+### 声明继承
+
+typescript 会将同名接口声明进行合并
+
+```ts
+interface User {
+    name: string
+}
+interface User {
+    age: number
+}
+const user: User = {
+    name: 'liuxixi',
+    age: 18
+}
+```
+
+interface 也可以 extends 继承 type
+
+```ts
+type Admin = {
+    role: string
+}
+interface User extends Admin {
+    name: string
+}
+const hd: User = {
+    role: 'admin',
+    name: 'liuxixi',
+}
+
+```
+
+type 与 interface 不同，存在同名的 type 时将是不允许的
+
+```ts
+type User {
+    name: string
+}
+type User {
+    age: number
+}
+```
+
+不过可以使用& 来进行 interface 的合并
+
+
+```ts
+interface Name {
+    name: string
+}
+interface Age {
+    age: number
+}
+type User = Name & Age
+```
+
+下面是 type 类型的声明合并
+
+```ts
+type Admin = {
+    role: string,
+    isSuperAdmin: boolean
+}
+type Member = {
+    name: string
+}
+
+type User = Admin & Member;
+
+const hd: User = {
+    isSuperAdmin: true,
+    role: 'admin',
+    name: 'liuxixi'
+}
+```
+
+下面声明的是满足任何一个 type 声明即可
+
+```ts
+type Admin = {
+    role: string,
+    isSuperAdmin: boolean
+}
+type Member = {
+    name: string
+}
+
+type User = Admin | Member;
+
+const hd: User = {
+    role: 'admin',
+    name: ' 刘嘻嘻'
+}
+
+```
+
+## implements
+
+class 可以使用 implements 来实现 type 或 interface
+
+
+
+```ts
+type Member = {
+    name: string
+}
+
+class User implements Member {
+    name: string = '刘嘻嘻'
+}
+
+```
