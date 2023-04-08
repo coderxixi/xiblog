@@ -16,7 +16,9 @@ export const sidebar = {
     {
       items: [
         { text: '基础知识', link: '/javascript/' },
-        { text: '运算符和流程控制', link: '/javascript/processcontrol' }, // /guide/index.md
+        { text: '运算符和流程控制', link: '/javascript/processcontrol' },
+        { text: '基本类型', link: '/javascript/basicdata' },  // /guide/index.md
+     
      
       ]
     }
