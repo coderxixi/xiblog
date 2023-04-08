@@ -395,3 +395,108 @@ let arr = ['xixi', '嘻嘻'];
 console.log(typeof arr.toString()); //string
 
 ```
+
+## Boolean
+
+布尔类型包括 true 与 false 两个值，开发中使用较多的数据类型。
+
+### 声明定义
+
+使用对象形式创建布尔类型
+
+```js
+console.log(new Boolean(true)); //true
+console.log(new Boolean(false)); //false
+```
+但建议使用字面量创建布尔类型
+
+```js
+let bl =true;
+```
+
+### 隐式转换
+
+基本上所有类型都可以隐式转换为 Boolean 类型。
+
+数据类型|	true|	false
+|----|----|----|
+String|	非空字符串|	空字符串
+Number	|非 0 的数值|	0 、NaN
+Array|	数组不参与比较时|	参与比较的空数组
+Object|	所有对象	|
+undefined	|无|	undefined
+null|	无|	null
+NaN	|无	|NaN
+
+
+当与 boolean 类型比较时，会将两边类型统一为数字 1 或 0。
+
+如果使用 Boolean 与数值比较时，会进行隐式类型转换 true 转为 1，false 转为 0。
+
+```js
+console.log(3 == true); //false
+console.log(0 == false); //true
+```
+
+下面是一个典型的例子，字符串在与 Boolean 比较时，两边都为转换为数值类型后再进行比较。
+
+```js
+console.log(Number("xi")); //NaN
+console.log(Boolean("xi")); //true
+console.log("xi" == true); //false
+console.log("1" == true); //true
+
+```
+
+数组的表现与字符串原理一样，会先转换为数值
+
+
+```js
+console.log(Number([])); //0
+console.log(Number([3])); //3
+console.log(Number([1, 2, 3])); //NaN
+console.log([] == false); //true
+console.log([1] == true); //true
+console.log([1, 2, 3] == true); //false
+```
+
+
+引用类型的 Boolean 值为真，如对象和数组
+
+```js
+if ([]) console.log("true");
+if ({}) console.log("true");
+
+```
+
+### 显式转换
+
+使用 !! 转换布尔类型
+
+```js
+let str = '';
+console.log(!!str); //false
+str = 0;
+console.log(!!str); //false
+str = null;
+console.log(!!str); //false
+str = new Date("2020-2-22 10:33");
+console.log(!!str); //true
+```
+
+使用 Boolean 函数可以显式转换为布尔类型
+
+```js
+let str = '';
+console.log(Boolean(str)); //false
+str = 0;
+console.log(Boolean(str)); //false
+str = null;
+console.log(Boolean(str)); //false
+str = new Date("2020-2-22 10:33");
+console.log(Boolean(str)); //true
+
+```
+
+
+
