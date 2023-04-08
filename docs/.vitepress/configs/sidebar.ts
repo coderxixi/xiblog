@@ -3,9 +3,7 @@ import type { DefaultTheme } from 'vitepress'
 export const sidebar = {
     '/html/':[
     {
-      // text: 'html',
       items: [
-      
         { text: '页面结构', link: '/html/' }, // /guide/index.md
         { text: '文本相关', link: '/html/text' }, // /guide/one.md
         { text: '链接与图片', link: '/html/picturesandlinks' } ,// /guide/two.md
@@ -16,9 +14,7 @@ export const sidebar = {
     ],
     '/css/': [
     {
-      // text: 'html',
       items: [
-
         { text: '基础知识', link: '/css/' }, // /guide/index.md
         { text: '选择器', link: '/css/selector' }, // /guide/one.md
         { text: '元素权重', link: '/css/elementweight' },// /guide/two.md
@@ -36,20 +32,11 @@ export const sidebar = {
         { text: '响应尺寸', link: '/css/tablemultimedia' },
         { text: '字体图标', link: '/css/tablemultimedia' },
         { text: '常用技巧', link: '/css/tablemultimedia' }
-
-
-
-
-
-
-
-
       ]
     }
      ],
   '/typescriptmd/': [
     {
-      // text: 'html',
       items: [
         { text: '环境配置', link: '/typescriptmd/' },
         { text: '基础类型', link: '/typescriptmd/foundationtype' },
@@ -57,7 +44,9 @@ export const sidebar = {
         { text: '断言的使用', link: '/typescriptmd/certainty' },
         { text: '类和接口', link: '/typescriptmd/class' },// /guide/index.md certainty// 
         { text: '泛型', link: '/typescriptmd/genericparadigm' },
-        { text: '装饰器', link: '/typescriptmd/decorator' }
+        { text: '装饰器', link: '/typescriptmd/decorator' },
+        { text: 'ts模块管理', link: '/typescriptmd/tsmodule' },
+        { text: '类型工具', link: '/typescriptmd/typetool' }
       ] 
     }
   ],
@@ -92,5 +81,4 @@ export const sidebar = {
 //     link: '/tablemultimedia/'
 //   }
 // ]
-
 
