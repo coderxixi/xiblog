@@ -55,7 +55,8 @@ export const sidebar = {
         { text: '基础类型', link: '/typescriptmd/foundationtype' },
         { text: '配置和调试', link: '/typescriptmd/dispose' },
         { text: '断言的使用', link: '/typescriptmd/certainty' },
-        { text: '类和接口', link: '/typescriptmd/class' }// /guide/index.md certainty// 
+        { text: '类和接口', link: '/typescriptmd/class' },// /guide/index.md certainty// 
+        { text: '泛型', link: '/typescriptmd/genericparadigm' }
       ] 
     }
   ],
