@@ -498,5 +498,111 @@ console.log(Boolean(str)); //true
 
 ```
 
+## Number
 
+### 声明定义
+
+使用对象方式声明
+
+```js
+let num = new Number(3);
+console.log(num+3); //6
+
+```
+
+Number 用于表示整数和浮点数，数字是 Number实例化的对象，可以使用对象提供的丰富方法
+
+
+```js
+let num = 99;
+console.log(typeof num);
+```
+
+### 基本函数
+判断是否为整数
+
+```js
+console.log(Number.isInteger(1.2));
+```
+
+指定返回的小数位数可以四舍五入
+
+```js
+console.log((16.556).toFixed(2)); // 16.56
+```
+
+### NaN
+
+表示无效的数值，下例计算将产生 NaN 结果。
+
+
+```js
+console.log(Number("xixi")); //NaN
+
+console.log(2 / 'xixi'); //NaN
+
+```
+
+NaN 不能使用 == 比较，使用以下代码来判断结果是否正确
+
+
+```js
+var res = 2 / 'xixi';
+if (Number.isNaN(res)) {
+	console.log('Error');
+}
+```
+
+也可以使用 Object.is 方法判断两个值是否完全相同
+
+```js
+var res = 2 / 'xixi';
+console.log(Object.is(res, NaN));
+```
+
+### 类型转换
+
+#### Number
+使用 Number 函数基本上可以转换所有类型
+
+
+```js
+console.log(Number('xixi')); //NaN
+console.log(Number(true));	//1
+console.log(Number(false));	//0
+console.log(Number('9'));	//9
+console.log(Number([]));	//0
+console.log(Number([5]));	//5
+console.log(Number([5, 2]));	//NaN
+console.log(Number({}));	//NaN
+```
+
+##### parseInt
+
+提取字符串开始去除空白后的数字转为整数。
+
+```js
+console.log(parseInt('  99xi'));	//99
+console.log(parseInt('18.55'));	//18
+
+```
+
+#### parseFloat
+
+转换字符串为浮点数，忽略字符串前面空白字符。
+
+```js
+console.log(parseInt('  99xi'));	//99
+console.log(parseInt('18.55'));	//18.55
+
+```
+
+### 舍入操作
+#### toFixed
+
+使用 toFixed 可对数值舍入操作，参数指定保存的小数位
+
+```js
+console.log(1.556.toFixed(2)); //1.56
+```
 
