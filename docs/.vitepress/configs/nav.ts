@@ -7,7 +7,7 @@ export const nav: DefaultTheme.Config['nav'] = [
     items: [
       { text: 'HTML', link: '/html/' },
       { text: 'CSS', link: '/css/' },
-      { text: 'Javascript', link: '/javascript' },
+      { text: 'Javascript', link: '/javascript/' },
       { text: 'Typescript', link: '/typescriptmd/' },
       { text: 'vue相关', link: '/vue' },
       { text: 'react相关', link: '/react' },

@@ -12,6 +12,14 @@ export const sidebar = {
       ]
     }
     ],
+  '/javascript/': [
+    {
+      items: [
+        { text: '基础知识', link: '/javascript/' }, // /guide/index.md
+     
+      ]
+    }
+  ],
     '/css/': [
     {
       items: [
