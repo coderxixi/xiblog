@@ -606,3 +606,27 @@ console.log(parseInt('18.55'));	//18.55
 console.log(1.556.toFixed(2)); //1.56
 ```
 
+
+
+## Math
+
+Math 对象提供了众多方法用来进行数学计算
+
+
+### 取极限值
+
+使用 min 与 max 可以取得最小与最大值。
+
+```js
+
+console.log(Math.min(1, 2, 3));
+
+console.log(Math.max(1, 2, 3));
+```
+
+
+使用apply 来从数组中取值
+
+```js
+console.log(Math.max.apply(Math, [1, 2, 3]));
+```
