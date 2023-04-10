@@ -630,3 +630,104 @@ console.log(Math.max(1, 2, 3));
 ```js
 console.log(Math.max.apply(Math, [1, 2, 3]));
 ```
+
+## Symbol
+
+Symbol用于防止属性名冲突而产生的，比如向第三方对象中添加属性时。
+
+Symbol 的值是唯一的，独一无二的不会重复的
+
+### 基础知识
+
+#### Symbol
+
+```js
+let name = Symbol();
+let name2 = Symbol();
+console.log(name); //symbol
+console.log(name == name2); //false
+```
+
+Symbol 不可以添加属性
+
+```js
+let user = Symbol();
+user.name = "xixi";
+console.log(user.name);
+```
+
+### 描述参数
+
+可传入字符串用于描述Symbol，方便在控制台分辨Symbol
+
+```js
+let user = Symbol("xixi");
+let age = Symbol("18");
+
+console.log(user); //Symbol("xixi")
+console.log(age.toString()); //Symbol("18")
+```
+传入相同参数Symbol也是独立唯一的，因为参数只是描述而已，但使用 Symbol.for则不会
+
+```js
+let info = Symbol("xixi");
+let user = Symbol("xixi");
+console.log(info == user); //false
+```
+使用description可以获取传入的描述参数
+
+```js
+let user = Symbol("xixi");
+console.log(user.description); //xixi
+```
+
+### Symbol.for
+
+根据描述获取Symbol，如果不存在则新建一个Symbol
+
+* 使用Symbol.for会在系统中将Symbol登记
+* 使用Symbol则不会登记
+
+```js
+let user= Symbol.for("xixi");
+let info = Symbol.for("xixi");
+console.log(user == info); //true
+```
+
+### Symbol.keyFor
+
+Symbol.keyFor 根据使用Symbol.for登记的Symbol返回描述，如果找不到返回undefined 。
+
+```js
+let user = Symbol.for("xixi");
+console.log(Symbol.keyFor(user)); //xixi
+
+let info = Symbol("coderxixi");
+console.log(Symbol.keyFor(info)); //undefined
+```
+
+### 对象属性
+
+Symbol 是独一无二的所以可以保证对象属性的唯一。
+
+* Symbol 声明和访问使用 []（变量）形式操作
+
+* 也不能使用 . 语法因为 .语法是操作字符串属性的。
+
+下面写法是错误的，会将symbol 当成字符串symbol处理
+
+```js
+let symbol = Symbol("xixi");
+let obj = {
+  symbol: "coderixixi"
+};
+console.log(obj);
+```
+正确写法是以[] 变量形式声明和访问
+```js
+let symbol = Symbol("xixi");
+let obj = {
+  [symbol]: "coderixixi"
+};
+console.log(obj);
+```
