@@ -706,6 +706,288 @@ let info = Symbol("coderxixi");
 console.log(Symbol.keyFor(info)); //undefined
 ```
 
+### Symbol.iterator
+Symbol.iterator 可以让我们定义一个对象默认的迭代器。
+
+有什么用途呢？正常的对象一般都是不可迭代的，如果我们直接用 for of 遍历一个对象，会抛出异常：TypeError: obj is not iterable ，因为对象默认是不可迭代的。
+
+我们可以用 for in 来做遍历
+```js
+const obj = { name: 'xixi', age: 17 };
+
+for (const key in obj) {
+  if (Object.hasOwnProperty.call(obj, key)) {
+    const element = obj[key];
+    console.log(key, element);
+  }
+}
+```
+但是如果我们开发的是一个自定义的数据结构，for in 可能就不那么好使了，比如现在有一个音乐播放器对象，我们需要实现一个自定义的播放列表，用于存储用户添加的歌曲。这个列表可以看作一个集合，其中每个元素代表一个歌曲，包含歌曲的名称、作者、时长等属性。
+
+这时我们就可以通过定义 Symbol.iterator 方法，让这个列表可以通过 for...of 循环进行遍历
+```js
+class Song {
+  constructor(name, artist, duration) {
+    this.name = name;
+    this.artist = artist;
+    this.duration = duration;
+  }
+}
+
+class Playlist {
+  constructor() {
+    this.songs = [];
+  }
+
+  addSong(song) {
+    this.songs.push(song);
+  }
+
+  [Symbol.iterator]() {
+    let index = 0;
+    const songs = this.songs;
+    return {
+      next: () => ({
+        value: songs[index++],
+        done: index > songs.length
+      })
+    }
+  }
+}
+
+const playlist = new Playlist();
+
+playlist.addSong(new Song('Song 1', 'Artist 1', '3:45'));
+playlist.addSong(new Song('Song 2', 'Artist 2', '4:20'));
+playlist.addSong(new Song('Song 3', 'Artist 3', '5:10'));
+
+for (const song of playlist) {
+  console.log(song.name);
+}
+
+// 输出：
+// "Song 1"
+// "Song 2"
+// "Song 3"
+```
+
+### Symbol.toStringTag
+默认情况下，我们在任何一个自定义的对象上调用 toString 方法，返回值都是下面这样
+
+```
+[object Object]
+```
+
+Symbol.toStringTag 可以被用来自定义对象的 toString 方法的返回值（注意不是重写 toString 方法），这个特性在调试的时候非常有用，帮助开发者更方便地了解对象的类型信息
+
+```js
+class People {
+  constructor(name, age) {
+    this.name = name;
+    this.age = age;
+  }
+
+  get [Symbol.toStringTag]() {
+    return 'People';
+  }
+}
+
+const people = new People('ConardLi', 17);
+
+console.log(people.toString()); // [object People]
+
+```
+
+### Symbol.toPrimitive
+
+Symbol.toPrimitive 可以被用来自定义对象类型转换时的行为。它可以接受一个 hint 参数，用于指示对象应该被转换成什么类型的值，比如 Number、String 或者其他默认的值。
+
+举一个实际的应用场景：假设我们正在开发一个日期处理工具，其中需要实现一个自定义的日期时间对象。这个对象包含日期时间的年月日时分秒等信息，这时候就可以用到 Symbol.toPrimitive 方法，来帮助我们自定义对象的类型转换行为
+```js
+class MyDateTime {
+  constructor(year, month, day, hour = 0, minute = 0, second = 0) {
+    this._datetime = new Date(year, month - 1, day, hour, minute, second);
+  }
+
+  [Symbol.toPrimitive](hint) {
+    switch (hint) {
+      case 'number':
+        return this._datetime.getTime();
+      case 'string':
+        return this._datetime.toLocaleString();
+      default:
+        return this._datetime.toString();
+    }
+  }
+}
+
+const myDate = new MyDateTime(2023, 4, 8, 15, 30, 0);
+
+console.log(myDate); // 输出：Sat Apr 08 2023 15:30:00 GMT+0800 (中国标准时间)
+console.log(myDate + 10000); // 输出：1699950200000
+console.log(`${myDate}`); // 输出："2023/4/8 下午3:30:00"
+```
+### Symbol.replace
+Symbol.replace 可以帮我们更灵活的处理 String.prototype.replace 方法，比如我们可以自定义字符串的替换行为。
+
+比如有这样一个需求场景：我们有一个字符串处理库，我们想自定义它的 replace 方法，让它可以替换一个字符串的所有元音字母。这时候就可以用到 Symbol.replace
+
+```js
+const vowels = ['a', 'e', 'i', 'o', 'u'];
+
+const customReplace = str => {
+  let result = '';
+  for (let i = 0; i < str.length; i++) {
+    if (vowels.includes(str[i])) {
+      result += '*';
+    } else {
+      result += str[i];
+    }
+  }
+  return result;
+};
+
+const customString = {
+  [Symbol.replace]: customReplace
+};
+
+const originalString = "hello world";
+
+const result = originalString.replace(customString, '');
+
+console.log(result); // outputs "h*ll* w*rld"
+
+```
+### Symbol.asyncIterator
+Symbol.asyncIterator 可以用来实现一个对象的异步迭代器，它可以用于遍历异步数据流，比如异步生成器函数、异步可迭代对象等。这个特性在我们需要处理异步数据流时非常有用。
+
+举一个实际的应用场景：假设我们正在开发一个异步数据源处理器，其中包含了大量的异步数据，比如网络请求、数据库查询等。这些数据需要被逐个获取并处理，同时由于数据量非常大，一次性获取全部数据会导致内存占用过大，因此需要使用异步迭代器来逐个获取数据并进行处理
+
+```js
+class AsyncDataSource {
+  constructor(data) {
+    this._data = data;
+  }
+
+  async *[Symbol.asyncIterator]() {
+    for (const item of this._data) {
+      const result = await this._processAsyncData(item);
+      yield result;
+    }
+  }
+
+  async _processAsyncData(item) {
+    // 模拟异步处理数据的过程
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(item.toUpperCase());
+      }, Math.random() * 1000);
+    });
+  }
+}
+
+async function processData() {
+  const dataSource = new AsyncDataSource(['a', 'b', 'c', 'd', 'e']);
+  for await (const data of dataSource) {
+    console.log(data);
+  }
+}
+
+processData();
+
+```
+### Symbol.hasInstance
+
+Symbol.hasInstance可以用于确定一个对象是否是某个构造函数的实例，它可以用来改变 instanceof 的行为
+
+```js
+class MyArray {
+  static [Symbol.hasInstance](instance) {
+    return Array.isArray(instance);
+  }
+}
+
+const arr = [1, 2, 3];
+console.log(arr instanceof MyArray); // true
+
+```
+### Symbol.species
+
+Symbol.species 可以用于指定创建派生对象时要使用的构造函数。一个实际的需求场景可能是我们需要对一个类进行继承，并且希望这个类的某些方法返回一个新的派生对象而不是基类的实例对象。下面是一个简单的例子
+
+```js
+class MyArray extends Array {
+  static get [Symbol.species]() {
+    return Array;
+  }
+
+  test(){
+    console.log('test');
+  }
+}
+
+const myArray = new MyArray(1, 2, 3);
+const mappedArray = myArray.map(x => x * 2);
+myArray.test();
+
+console.log(mappedArray instanceof MyArray); // false
+console.log(mappedArray instanceof Array); // true
+```
+### Symbol.match
+Symbol.match 可以用来确定使用 String.prototype.match 方法时要搜索的值，它可用于更改 match 类 RegExp 对象的方法行为，下面是一个实际实用案例
+
+```js
+class CustomRegExp extends RegExp {
+  [Symbol.match](str) {
+    const matches = super[Symbol.match](str);
+    if (matches) {
+      return matches.map(match => {
+        return `匹配到了: ${match}`;
+      });
+    }
+    return matches;
+  }
+}
+
+const regex = new CustomRegExp('hello', 'g');
+const result = 'hello world'.match(regex);
+console.log(result); // ["匹配到了: hello"]
+```
+### Symbol.split
+Symbol.split 可以用来确定使用 String.prototype.split 方法执行时具体要拆分的值。
+
+一个实际需求场景：我们需要从文本中提取出所有的数字。但是文本中的数字可能包含在不同的字符和符号中，例如括号、分隔符和单位等。使用 Symbol.split 可以自定义分割符，这样我们就可以根据自己的需求来对文本进行分割。
+```js
+const customSplit = str => str.split(/[\s$¥€]+/);
+
+const customRegExp = {
+  [Symbol.split]: customSplit
+};
+
+const string = "100$200¥300€400 500";
+
+console.log(string.split(customRegExp)); // outputs [ '100', '200', '300', '400', '500' ]
+
+```
+### Symbol.unscopables
+
+Symbol.unscopables 通常可以用来避免在使用 with 语句时访问对象中不希望被访问的属性。下面是一个示例，其中使用 with 语句访问对象的某些属性，但通过将这些属性添加到 [Symbol.unscopables] 对象中，可以防止访问
+
+```js
+const globalVars = {
+  a: 10,
+  b: 20,
+  [Symbol.unscopables]: {
+    b: true
+  }
+};
+
+with (globalVars) {
+  console.log(a); // 输出 10
+  console.log(b); // 抛出 ReferenceError
+}
+
+```
 ### 对象属性
 
 Symbol 是独一无二的所以可以保证对象属性的唯一。
