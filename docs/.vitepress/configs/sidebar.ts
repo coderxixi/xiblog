@@ -19,7 +19,8 @@ export const sidebar = {
         { text: '运算符和流程控制', link: '/javascript/processcontrol' },
         { text: '基本类型', link: '/javascript/basicdata' },
         { text: '数组类型', link: '/javascript/arr' },  
-        { text: 'Set数据结构', link: '/javascript/setdata' } ,
+        { text: 'Set数据结构', link: '/javascript/setdata' },
+        { text: 'Map数据结构', link: '/javascript/mapdata' } ,
         // /guide/index.md
       ]
     }
