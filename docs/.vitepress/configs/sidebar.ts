@@ -20,7 +20,8 @@ export const sidebar = {
         { text: '基本类型', link: '/javascript/basicdata' },
         { text: '数组类型', link: '/javascript/arr' },  
         { text: 'Set数据结构', link: '/javascript/setdata' },
-        { text: 'Map数据结构', link: '/javascript/mapdata' } ,
+        { text: 'Map数据结构', link: '/javascript/mapdata' },
+        { text: '迭代器和生成器', link: '/javascript/iterativegeneration' } 
         // /guide/index.md
       ]
     }
